@@ -31,6 +31,13 @@ body
     z-index: 2; /*For at menubaren altid er forrest på siden*/
     border-top: 2px solid #333;
     border-bottom: 2px solid #333;
+
+    /* Samme border som på content-containeren
+    border: 2px solid #333;
+    border-radius: 15px;
+    margin: 20px;
+    */
+
     padding-top: 8px; /*For at give luft om bogstaverne*/
     padding-bottom: 8px; /*For at give luft om bogstaverne*/
     background-color: #FAD4E2;
