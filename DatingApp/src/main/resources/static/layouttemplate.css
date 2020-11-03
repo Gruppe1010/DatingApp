@@ -1,7 +1,7 @@
 body
 {
     margin: 0;
-    background-image: url("https://i.imgur.com/hty4mKK.jpg");
+    background-image: url("https://i.imgur.com/CygUGRW.jpg");
     /*background-repeat: no-repeat;*/  /*Så billdet ikke gentager sig*/
     /*Ændre størrelsen så den passer til siden*/
     background-size: cover;
@@ -13,10 +13,9 @@ body
 .logo
 {
     position: relative;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    width: 650px;
-    margin: auto;
+    margin: 10px;
+    padding-bottom: 20px;
+    height: 100px;
 }
 
 .white
