@@ -196,3 +196,9 @@ input[type='radio']:checked:after
     display: inline-block;
     border: 2px solid #333;
 }
+
+/*Gør at musen bliver til en text cursor som ved de andre felter*/
+.password:hover
+{
+    cursor: text;
+}
