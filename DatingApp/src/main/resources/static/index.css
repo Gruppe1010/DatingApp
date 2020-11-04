@@ -1,0 +1,163 @@
+body
+{
+    margin: 0;
+    background-image: url("https://i.imgur.com/CygUGRW.jpg");
+    background-attachment: fixed;
+    /*background: url("https://i.imgur.com/q9sNJ39.png") fixed; Denne linje svare til de to linjer ovenover*/
+    /*Ændre størrelsen så den passer til siden*/
+    background-size: cover;
+    /*background-repeat: no-repeat;*/ /*Så billdet ikke gentager sig*/
+    min-height: 100%;
+}
+
+
+.logo
+{
+    position: relative;
+    display: inline;
+    padding-top: 30px;
+    height: 150px;
+}
+
+.color
+{
+    background-color: #FAD4E2;
+}
+
+.indexwrapper
+{
+    font-family: 'Bitter', serif;
+    font-weight: bold;
+}
+#form-container
+{
+    padding-top: 70px;
+    width: 500px;
+    margin: auto;
+
+}
+
+#login-form
+{
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px 30px 20px 30px;
+    border: 2px solid;
+    border-radius: 15px;
+    /*REDIGER HER - TODO gør den dynamisk */
+    height: 700px;
+}
+
+.loginformheadline
+{
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.createuser
+{
+    position: relative;
+    display: inline;
+    float: left;
+
+    background-color: #FAD4E2;
+    border: 2px solid;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+a.createuser:link
+{
+    color: black;
+    border-color: black;
+    text-decoration: none;
+}
+a.createuser:hover
+{
+    background-color: #FA6CA0;
+}
+a.createuser:visited
+{
+    color: black;
+}
+
+.submit
+{
+    position: relative;
+
+    float: right;
+    padding-right: 5px;
+    padding-bottom: 5px;
+
+}
+
+input[type=submit]:hover
+{
+    background-color: #FA6CA0;
+    border-color: black;
+}
+input[type=text]:hover
+{
+    background-color: #FA6CA0;
+}
+input[type=password]:hover
+{
+    background-color: #FA6CA0;
+}
+
+.fontsize
+{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Bitter', serif;
+}
+
+.formlinestyling
+{
+    position: relative;
+    width: 100%;
+
+    border-color: black;
+    border-radius: 5px; /*For afrundede kanter på border*/
+
+    line-height: 40px; /*For luft om bogstaver*/
+    padding-left: 10px; /*For luft om bogstaver*/
+}
+
+
+
+input[type=submit]
+{
+    background-color: #FAD4E2;
+    font-weight: bold;
+    border: 2px solid;
+    border-radius: 5px;
+    color: black;
+    padding: 10px 20px; /*MÅSKE FJERN*/
+    text-decoration: none;
+    /*margin: 4px 2px;*/
+    margin: auto;
+    cursor: pointer;
+}
+
+input[type=password]
+{
+    background-color: #FAD4E2;
+
+    font-weight: bold;
+    border: 2px solid;
+    border-radius: 5px;
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sex
+{
+    position: relative;
+    float: right;
+    padding-right: 5px;
+}

@@ -19,6 +19,13 @@ public class DatingApplication
         SpringApplication.run(DatingApplication.class, args);
     
     
+        
+    }
+    
+    // TODO fjern evt.
+    private static void postnumre()
+    {
+    
         ArrayList<PostalInfo> list = new ArrayList<>();
     
     
@@ -1303,28 +1310,26 @@ public class DatingApplication
         list.add(new PostalInfo(	3980	,"	Ittoqqortoormiit	"));
         list.add(new PostalInfo(	3984	,"	Danmarkshavn	"));
         list.add(new PostalInfo(	3985	,"	Constable Pynt	"));
-
-
+    
+    
         Connection connection = null;
         try
         {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dummy_lovestruck?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","gruppe10","gruppe10");
-           // jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-
-
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lovestruck?serverTimezone=UTC","gruppe10","gruppe10");
+            // jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+        
+        
         } catch(SQLException throwables)
         {
             throwables.printStackTrace();
         }
-
+    
         for(PostalInfo postalInfo : list)
         {
             addPostalInfoToDatabase(postalInfo, connection);
         }
-        
-        
-    }
     
+    }
     private static void addPostalInfoToDatabase(PostalInfo postalInfo, Connection connection)
     {
         try

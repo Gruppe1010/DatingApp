@@ -27,7 +27,6 @@ body
 {
     position: -webkit-sticky; /*Så sticky også virker i Safari*/
     position: sticky;
-    font-family: 'Bitter', serif;
 
     top: 0; /*Ellers virker den ikke. Virker om den er 0, 20px, 999 osv. Hvorfor, kan jeg ikke finde svar på*/
     z-index: 2; /*For at menubaren altid er forrest på siden*/
@@ -193,7 +192,6 @@ a.footertext:hover
 {
     font-family: 'Bitter', serif;
     position: relative;
-    font-family: 'Bitter', serif;
 
     /*100% af viewport height som muliggøre at den kan ændre sig afhængig af vinduets størrelse*/
     min-height: 100vh;
