@@ -32,6 +32,25 @@ public class DatingController
         return "startpage"; // html
     }
     
+    @GetMapping("/chatPage")
+    public String chatPage()
+    {
+        return "chatpage"; // html
+    }
+    
+    @GetMapping("/candidatePage")
+    public String candidatePage()
+    {
+        return "candidatepage"; // html
+    }
+    
+    @GetMapping("/searchPage")
+    public String searchPage()
+    {
+        return "searchpage"; // html
+    }
+    
+    
     // I PostMappingens "/" SKAL der stå "post" FØRST! : fx IKKE "/createUser" men "/postCreateUser"
     @PostMapping("/postCreateUser")
     public String postTwit(WebRequest dataFromCreateUserForm)
