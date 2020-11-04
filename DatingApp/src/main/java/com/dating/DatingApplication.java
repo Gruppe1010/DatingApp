@@ -1303,32 +1303,43 @@ public class DatingApplication
         list.add(new PostalInfo(	3980	,"	Ittoqqortoormiit	"));
         list.add(new PostalInfo(	3984	,"	Danmarkshavn	"));
         list.add(new PostalInfo(	3985	,"	Constable Pynt	"));
-    
-    
-    
+
+
+        Connection connection = null;
+        try
+        {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dummy_lovestruck?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC","gruppe10","gruppe10");
+           // jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+
+
+        } catch(SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+
         for(PostalInfo postalInfo : list)
         {
-            addPostalInfoToDatabase(postalInfo);
+            addPostalInfoToDatabase(postalInfo, connection);
         }
         
         
     }
     
-    private static void addPostalInfoToDatabase(PostalInfo postalInfo)
+    private static void addPostalInfoToDatabase(PostalInfo postalInfo, Connection connection)
     {
         try
         {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost3306/dummy_lovestruck", "gruppe10"
-                    , "gruppe10");
+            //Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dummy_lovestruck","gruppe10","gruppe10");
+            System.out.println("TEST1");
             
-            String sqlCommand = "INSERT into postal_info(zipcode, city) values (?,?);";
+            String sqlCommand = "INSERT into postal_info(zip_code, city) values (?,?);";
             
             
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
             PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
             preparedStatement.setInt(1, postalInfo.getZipCode());
             preparedStatement.setString(2, postalInfo.getCity());
-          
+            System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         }
         catch(SQLException e)
