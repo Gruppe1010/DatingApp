@@ -11,13 +11,14 @@ public class UserService
         DatingUser datingUser = null;
         
         boolean sex = resolveSexInput(dataFromCreateUserForm.getParameter("sexinput"));
+        int interestedIn = resolveInterestedInInput(dataFromCreateUserForm.getParameter("interestedininput"));
+        
         String password = dataFromCreateUserForm.getParameter("passwordinput");
         String confirmPassword = dataFromCreateUserForm.getParameter("confirmpasswordinput");
     
         if(checkIfPasswordsMatch(password, confirmPassword))
         {
-           datingUser = new DatingUser(sex,
-                    Integer.parseInt(dataFromCreateUserForm.getParameter("interestedininput")),
+           datingUser = new DatingUser(sex, interestedIn,
                     Integer.parseInt(dataFromCreateUserForm.getParameter("ageinput")),
                     dataFromCreateUserForm.getParameter("usernameinput"),
                     dataFromCreateUserForm.getParameter("emailinput"), password);
@@ -28,9 +29,27 @@ public class UserService
     }
     
     
-    public static boolean resolveSexInput(String string)
+    public static boolean resolveSexInput(String sexInput)
     {
-        return string.equals("female");
+        return sexInput.equals("female");
+    }
+    public static int resolveInterestedInInput(String interestedInInput)
+    {
+        int interestedIn = -1;
+        if(interestedInInput.equals("males"))
+        {
+            interestedIn = 0;
+        }
+        else if(interestedInInput.equals("females"))
+        {
+            interestedIn = 1;
+        }
+        else
+        {
+            interestedIn = 2;
+        }
+        
+        return interestedIn;
     }
     
     public static boolean checkIfPasswordsMatch(String password, String confirmPassword)

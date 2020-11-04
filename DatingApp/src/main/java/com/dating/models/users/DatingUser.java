@@ -10,7 +10,7 @@ public class DatingUser extends User
     private int idDatingUser;
     private boolean blacklisted; // 0 == false, 1 == true
     private boolean sex; // false == mænd, true == kvinder
-    private int interestedIn; // 1 == mænd, 2 == kvinder, 3 == begge køn
+    private int interestedIn; // 0 == mænd, 1 == kvinder, 2 == begge køn
     private int age;
     // TODO private Image profilePicture;
     private String description;
