@@ -32,6 +32,7 @@ public class DatingController
         return "startpage"; // html
     }
     
+    // I PostMappingens "/" SKAL der stå "post" FØRST! : fx IKKE "/createUser" men "/postCreateUser"
     @PostMapping("/postCreateUser")
     public String postTwit(WebRequest dataFromCreateUserForm)
     {

@@ -1,10 +1,13 @@
 package com.dating.services;
 
 import com.dating.models.users.DatingUser;
+import com.dating.repositories.UserRepository;
 import org.springframework.web.context.request.WebRequest;
 
 public class UserService
 {
+    UserRepository userRepository = new UserRepository();
+    
     
     public DatingUser createDatingUser(WebRequest dataFromCreateUserForm)
     {
@@ -12,16 +15,19 @@ public class UserService
         
         boolean sex = resolveSexInput(dataFromCreateUserForm.getParameter("sexinput"));
         int interestedIn = resolveInterestedInInput(dataFromCreateUserForm.getParameter("interestedininput"));
-        
+        int age = Integer.parseInt(dataFromCreateUserForm.getParameter("ageinput"));
+        String username = dataFromCreateUserForm.getParameter("usernameinput");
+        String email =  dataFromCreateUserForm.getParameter("emailinput");
         String password = dataFromCreateUserForm.getParameter("passwordinput");
         String confirmPassword = dataFromCreateUserForm.getParameter("confirmpasswordinput");
-    
-        if(checkIfPasswordsMatch(password, confirmPassword))
+        
+        boolean usernameIsAvailable = userRepository.isUsernameAvailable(username);
+        boolean emailIsAvailable = userRepository.isEmailAvailable(email);
+        
+        
+        if(age >= 16 && usernameIsAvailable && emailIsAvailable && checkIfPasswordsMatch(password, confirmPassword))
         {
-           datingUser = new DatingUser(sex, interestedIn,
-                    Integer.parseInt(dataFromCreateUserForm.getParameter("ageinput")),
-                    dataFromCreateUserForm.getParameter("usernameinput"),
-                    dataFromCreateUserForm.getParameter("emailinput"), password);
+           datingUser = new DatingUser(sex, interestedIn, age, username, email, password);
         }
     
         return datingUser;

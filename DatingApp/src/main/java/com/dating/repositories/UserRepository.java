@@ -23,7 +23,6 @@ public class UserRepository
         return connection;
     }
     
-    
     public boolean addDatingUserToDb(DatingUser datingUser)
     {
     
@@ -65,8 +64,6 @@ public class UserRepository
         }
     }
     
-    
-    
     public int retrieveDatingUserIdFromDb(DatingUser datingUser)
     {
         establishConnection();
@@ -102,5 +99,69 @@ public class UserRepository
         
         return idDatingUser;
     }
+    
+    public boolean isUsernameAvailable(String username)
+    {
+        establishConnection();
+    
+        boolean usernameIsAvailable = true; // sættes til at være available by default
+    
+        try
+        {
+            String sqlCommand = "SELECT * FROM dating_users WHERE username = ?";
+        
+            // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+        
+            preparedStatement.setString(1, username);
+       
+            ResultSet resultSet = preparedStatement.executeQuery();
+        
+            // TODO Find ud af hvorfor vi skal skrive next
+            if(resultSet.next())
+            {
+                usernameIsAvailable = false;
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error in isUsernameAvailable: " + e.getMessage());
+        }
+    
+        return usernameIsAvailable;
+    }
+    
+    public boolean isEmailAvailable(String email)
+    {
+        establishConnection();
+    
+        boolean emailIsAvailable = true; // sættes til at være available by default
+    
+        try
+        {
+            String sqlCommand = "SELECT * FROM dating_users WHERE email = ?";
+        
+            // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+        
+            preparedStatement.setString(1, email);
+        
+            ResultSet resultSet = preparedStatement.executeQuery();
+        
+            // TODO Find ud af hvorfor vi skal skrive next
+            if(resultSet.next())
+            {
+                emailIsAvailable = false;
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error in isEmailAvailable: " + e.getMessage());
+        }
+    
+        return emailIsAvailable;
+    }
+    
+    
     
 }
