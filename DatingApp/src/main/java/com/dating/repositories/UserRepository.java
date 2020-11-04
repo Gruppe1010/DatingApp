@@ -72,21 +72,32 @@ public class UserRepository
         establishConnection();
         
         int idDatingUser = -1;
-        
+
         try
         {
-            String sqlCommand = "SELECT id_dating_user FROM dating_users WHERE username like ?";
+            String sqlCommand = "SELECT * FROM dating_users WHERE username like ?";
         
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
             PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
         
             preparedStatement.setString(1, "%" + datingUser.getUsername() + "%");
-            
-            idDatingUser = preparedStatement.executeUpdate();
+            System.out.println("TEST");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            System.out.println("Test2");
+
+            // TODO Find ud af hvorfor vi skal skrive next
+            if(resultSet.next())
+            {
+                idDatingUser = resultSet.getInt(1);
+            }
+
+
+
+            System.out.println(idDatingUser);
         }
         catch(SQLException e)
         {
-            System.out.println("Error in addDatingUserToDb: " + e.getMessage());
+            System.out.println("Error in retrieveIdDatingUserFromDb: " + e.getMessage());
         }
         
         return idDatingUser;
