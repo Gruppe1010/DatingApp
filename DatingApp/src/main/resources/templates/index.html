@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title> Know Your Waste </title>
+    <title> Love Struck </title>
 
-    <link rel="icon" href="https://i.imgur.com/GAoX0k6.png" type="image/png"/>
+    <link rel="icon" href="https://i.imgur.com/LToUXOO.png" type="image/png"/>
     <meta charset="utf-8"/>
     <meta name="description" content="KnowYourWaste er en side for forretninger, der ønsker at mindske deres madspild"/>
 
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <!--Font-->
     <link href="https://fonts.googleapis.com/css2?family=Bitter:wght@700&display=swap" rel="stylesheet">
-    <!-- font-family: 'Quicksand', sans-serif; -->
+    <!-- font-family: 'Bitter', sans-serif; -->
 
     <!--Icon-->
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -25,31 +25,31 @@
 
 <div class="indexwrapper">
 
-
-
     <div class="container font">
-        <div class="row">
-            <!-- Kolonne til inputfelt -->
+
+        <div id="logos">
+            <div class="logo">
+                <a class="linklogo"><img src="https://i.imgur.com/h8kGO5J.png" alt="/textLogo.png" class="logo"></a>
+                <span>&nbsp; &nbsp; &nbsp;</span>
+                <a class="linklogo"><img src="https://i.imgur.com/LToUXOO.png" alt="/heartLogo.png" class="logo"></a>
+            </div>
+        </div>
+
+      <div class="row">
+        <!-- Kolonne til inputfelt -->
             <div class="col">
-
-                <div class="logo">
-                    <a class="linklogo"><img src="https://i.imgur.com/h8kGO5J.png" alt="" class="logo"></a>
-                    <span>&nbsp; &nbsp; &nbsp; </span>
-                    <a class="linklogo"><img src="https://i.imgur.com/LToUXOO.png" alt="" class="logo"></a>
-                </div>
-
                 <div id="form-container">
                     <!-- Dette er en form
                     Vi laver @PostMapping("/createUser") i Controlleren for at lave et endpoint - pga. denne form -->
                     <form id="login-form" action="/postCreateUser" method="post">
                         <h3 class="loginformheadline">Opret din bruger</h3>
-                        <h5 class="loginformheadline">- og bliv lovestruck</h5>
+                        <h5 class="loginformunderheadline">- og bliv lovestruck</h5>
                         <!--<input> Laver input-felt
                         type="text" == typen af input der tages imod i inputfeltet
                         id="brugernavn" == Kalder bestemt styling vi har i css-filen
                         name="brugernavninput" == giver inputtet vi får ind referencenavnet, catfact -->
 
-                        <span class="fontsize">Mit køn: </span>
+                        <span class="fontsize">Mit køn: </span><br>
                         <div class="sex fontsize">
                             <input type="radio" id="male" name="sexinput" value="male" class="color"> <!--value == sikkert den String som den returnerer - måske-->
                             <label for="male">Mand&nbsp;&nbsp;&nbsp;</label>

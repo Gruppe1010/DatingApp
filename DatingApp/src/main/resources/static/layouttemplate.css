@@ -45,13 +45,13 @@ body
 }
 
 
-a.linkmenubarheadlinewhite:link
+a.linkmenubarheadlineactive:link
 {
     color: #FA6CA0;
     text-decoration: none;
 }
 
-a.linkmenubarheadlinewhite:visited
+a.linkmenubarheadlineactive:visited
 {
     color: #FA6CA0;
 }
@@ -93,7 +93,7 @@ a.linkmenubarheadlinelogout:visited
 
 a.linkmenubarheadlinelogout:hover
 {
-    color: #FEACCA;
+    color: #FA6CA0;
 }
 
 footer
