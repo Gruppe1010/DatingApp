@@ -41,7 +41,7 @@
                 <div id="form-container">
                     <!-- Dette er en form
                     Vi laver @PostMapping("/createUser") i Controlleren for at lave et endpoint - pga. denne form -->
-                    <form id="login-form" action="/createUser" method="post">
+                    <form id="login-form" action="/postCreateUser" method="post">
                         <h3 class="loginformheadline">Opret din bruger</h3>
                         <h5 class="loginformheadline">- og bliv lovestruck</h5>
                         <!--<input> Laver input-felt
@@ -79,7 +79,7 @@
                         <input type="password" id="confirmpassword" name="confirmpasswordinput" placeholder="Bekræft adgangskode" required class="color fontsize formlinestyling"><br><br>
 
 
-                        <input type="submit" value="Log ind" class="submit fontsize">
+                        <input type="submit" value="Opret bruger" class="submit fontsize">
 
                     </form>
                 </div>

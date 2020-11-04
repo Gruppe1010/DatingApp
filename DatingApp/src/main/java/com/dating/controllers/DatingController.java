@@ -32,7 +32,7 @@ public class DatingController
         return "startpage"; // html
     }
     
-    @PostMapping("/createUser")
+    @PostMapping("/postCreateUser")
     public String postTwit(WebRequest dataFromCreateUserForm)
     {
         
