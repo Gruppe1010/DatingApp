@@ -136,6 +136,13 @@ public class DatingUser extends User
     
     
     // andre metoder
+    /**
+     * Konverterer boolean til integer-værdi
+     *
+     * @param booleanInput Bool'en som skal konverteres
+     
+     * @return int Den konverterede boolean
+     */
     public int convertBooleanToInt(Boolean booleanInput)
     {
         int convertedBoolean = 0; // convertedBoolean er nu sat til false - 0 == false
@@ -153,16 +160,6 @@ public class DatingUser extends User
     public void editUserInfo()
     {
     
-    }
-    
-    public User createDatingUser()
-    {
-        // lav user-objekt
-        // tilføj user-obj til database
-        // findUserId(user-objekt) == finder lige id'et på det nye user-objekt
-        // opretKandidatliste(idDatingUser);
-        
-        return new DatingUser();
     }
     
     

@@ -18,7 +18,11 @@ public class DatingController
     
     
     
-    
+    /**
+     * Returnerer index-html-side ved /-request
+     *
+     * @return String html-siden
+     */
     @GetMapping("/")
     public String index()
     {
@@ -53,9 +57,8 @@ public class DatingController
     
     // I PostMappingens "/" SKAL der stå "post" FØRST! : fx IKKE "/createUser" men "/postCreateUser"
     @PostMapping("/postCreateUser")
-    public String postTwit(WebRequest dataFromCreateUserForm)
+    public String postCreateUser(WebRequest dataFromCreateUserForm)
     {
-        
         DatingUser datingUser = userService.createDatingUser(dataFromCreateUserForm);
     
         if(datingUser!=null)

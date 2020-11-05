@@ -8,6 +8,11 @@ public class UserRepository
 {
     Connection connection = null;
     
+    /**
+     * Laver en connection til lovestruck-databasen
+     *
+     * @return Connection Den oprettede connection ELLER null ved fejl i oprettelsen af connection
+     */
     public Connection establishConnection()
     {
         try
@@ -23,6 +28,13 @@ public class UserRepository
         return connection;
     }
     
+    /**
+     * Tilføjer DatingUser-objekt til dating_users-tabellen i db OG sætter dets id-attribut
+     *
+     * @param datingUser
+     *
+     * @return boolean Om det lykkedes eller ej
+     */
     public boolean addDatingUserToDb(DatingUser datingUser)
     {
     

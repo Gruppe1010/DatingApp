@@ -24,14 +24,13 @@ public class UserService
         boolean usernameIsAvailable = userRepository.isUsernameAvailable(username);
         boolean emailIsAvailable = userRepository.isEmailAvailable(email);
         
-        
+        // brugeren bliver kun oprettet i systemet hvis:
         if(age >= 16 && usernameIsAvailable && emailIsAvailable && checkIfPasswordsMatch(password, confirmPassword))
         {
            datingUser = new DatingUser(sex, interestedIn, age, username, email, password);
         }
     
         return datingUser;
-        
     }
     
     

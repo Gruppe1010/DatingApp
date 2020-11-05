@@ -6,13 +6,13 @@ public abstract class User
     private String email;
     private String password;
     
+    // constructors
     public User(String username, String email, String password)
     {
         this.username = username;
         this.email = email;
         this.password = password;
     }
-    
     public User(){}
     
     
