@@ -4,15 +4,25 @@ import java.util.ArrayList;
 
 public class Admin extends User
 {
-    
     private ArrayList<DatingUser> blacklistedUsersList;
     
+    
+    // constructors
     public Admin(){}
     public Admin(String username, String email, String password)
     {
         super(username, email, password); // den kalder superklassens constructor
         
         blacklistedUsersList = null;
+    }
+    
+    // getters + setters
+    
+    // andre metoder
+    @Override
+    public boolean isAdmin()
+    {
+        return true;
     }
     
     

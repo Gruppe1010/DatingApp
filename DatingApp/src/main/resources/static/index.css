@@ -22,6 +22,11 @@ body
 .logos
 {
     text-align:center;
+    /*
+    position: relative;
+    display: inline;
+
+     */
 }
 
 .color
@@ -100,6 +105,12 @@ a.createuser:visited
     /*float fik den til at ødelægge dynamikken i boksen. Left gjorde ikke.*/
     left: 269px;
 }
+.login
+{
+    position: relative;
+    /*float fik den til at ødelægge dynamikken i boksen. Left gjorde ikke.*/
+    left: 323px;
+}
 
 input[type=submit]:hover
 {
@@ -135,6 +146,48 @@ input[type=password]:hover
     line-height: 40px; /*For luft om bogstaver*/
     padding-left: 10px; /*For luft om bogstaver*/
 }
+
+.loginbutton
+{
+    position: relative;
+    display: inline;
+    float: right;
+    float: top;
+
+    background-color: #FAD4E2;
+    font-weight: bold;
+    border: 2px solid;
+    border-radius: 5px;
+    color: #333;
+    padding: 10px 20px; /*MÅSKE FJERN*/
+    text-decoration: none;
+    /*margin: 4px 2px;*/
+    margin: 50px;
+    cursor: pointer;
+}
+.loginbutton:hover {
+
+    background-color: #FA6CA0;
+    border-color: #333;
+}
+/* DET VIRKER IKKE
+a.logInButton:link
+{
+    color: #333;
+    border-color: #333;
+    text-decoration: none;
+}
+a.logInButton:hover
+{
+    background-color: #FA6CA0;
+}
+a.logInButton:visited
+{
+    color: #333;
+}
+
+ */
+
 
 input[type=submit]
 {

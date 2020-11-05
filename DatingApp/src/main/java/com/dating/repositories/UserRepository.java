@@ -1,6 +1,8 @@
 package com.dating.repositories;
 
 import com.dating.models.users.DatingUser;
+import com.dating.models.users.User;
+import org.springframework.web.context.request.WebRequest;
 
 import java.sql.*;
 
@@ -172,6 +174,37 @@ public class UserRepository
         }
     
         return emailIsAvailable;
+    }
+    
+    public User checkIfUserExists(WebRequest dataFromLogInForm)
+    {
+        establishConnection();
+    
+        User loggedInUser = null;
+        
+        try
+        {
+            String sqlCommand = "SELECT * FROM admins WHERE username = ? AND password = ?";
+        
+            // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+        
+            preparedStatement.setString(1, dataFromLogInForm.getParameter("username"));
+        
+            ResultSet resultSet = preparedStatement.executeQuery();
+        
+            // TODO Find ud af hvorfor vi skal skrive next
+            if(resultSet.next())
+            {
+                //emailIsAvailable = false;
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error in isEmailAvailable: " + e.getMessage());
+        }
+    
+        return loggedInUser;
     }
     
     

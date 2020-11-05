@@ -1,6 +1,7 @@
 package com.dating.controllers;
 
 import com.dating.models.users.DatingUser;
+import com.dating.models.users.User;
 import com.dating.repositories.UserRepository;
 import com.dating.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,11 @@ public class DatingController
         return "index";
     }
     
+    @GetMapping("/logIn")
+    public String logIn()
+    {
+        return "login"; // html
+    }
     
     @GetMapping("/startPage")
     public String startPage()
@@ -75,8 +81,30 @@ public class DatingController
         }
     
         return "redirect:/";
-        
-    
     }
-
+    
+    @PostMapping("/postLogIn")
+    public String postLogIn(WebRequest dataFromLogInForm)
+    {
+        User loggedInUser = null;
+        
+        loggedInUser = userRepository.checkIfUserExists(dataFromLogInForm);
+        
+        // tjek bruger ting bla blah
+        if(loggedInUser!=null)
+        {
+            if(loggedInUser.isAdmin())
+            {
+                return "redirect:/startPageAdmin"; // url
+            }
+            // ellers er det en datingUser
+            return "redirect:/startPage"; // url
+        }
+        
+        return "redirect:/logIn"; // url
+    }
+    
+    
+    
+    
 }

@@ -154,6 +154,12 @@ public class DatingUser extends User
         
         return convertedBoolean;
     }
+    
+    @Override
+    public boolean isDatingUser()
+    {
+        return true;
+    }
 
     
     

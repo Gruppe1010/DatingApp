@@ -15,7 +15,7 @@ public abstract class User
     }
     public User(){}
     
-    
+    // getters + setters
     public String getUsername()
     {
         return username;
@@ -39,5 +39,17 @@ public abstract class User
     public void setPassword(String password)
     {
         this.password = password;
+    }
+    
+    
+    // andre metoder
+    
+    public boolean isAdmin()
+    {
+        return false;
+    }
+    public boolean isDatingUser()
+    {
+        return false;
     }
 }
