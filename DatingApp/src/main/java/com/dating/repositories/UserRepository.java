@@ -8,19 +8,23 @@ import java.sql.*;
 
 public class UserRepository
 {
-    Connection connection = null;
+    Connection lovestruckConnection = null;
+    Connection favouriteslistConnection = null;
     
     /**
      * Laver en connection til lovestruck-databasen
      *
+     * @param dbName Navnet på db som vi connecter til
+     *
      * @return Connection Den oprettede connection ELLER null ved fejl i oprettelsen af connection
      */
-    public Connection establishConnection()
+    public Connection establishConnection(String dbName)
     {
+        Connection connection = null;
         try
         {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/lovestruck" +
-                                                             "?serverTimezone=UTC", "gruppe10", "gruppe10");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+ dbName +
+                                                                       "?serverTimezone=UTC", "gruppe10", "gruppe10");
         }
         catch(SQLException e)
         {
@@ -44,14 +48,14 @@ public class UserRepository
     
         try
         {
-            establishConnection();
+            establishConnection("lovestruck");
         
             String sqlCommand = "INSERT into dating_users(blacklisted, sex, interested_in, age, username, email, " +
                                         "password) " +
                                         "values (?,?,?,?,?,?,?);";
             
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
             
             preparedStatement.setInt(1, datingUser.convertBooleanToInt(datingUser.isBlacklisted()));
             preparedStatement.setInt(2, datingUser.convertBooleanToInt(datingUser.getSex()));
@@ -96,11 +100,12 @@ public class UserRepository
     {
         try
         {
-            establishConnection();
+            establishConnection("lovestruck");
     
-            String sqlCommand = "CREATE TABLE lovestruck.`favourites_list_?` (id_dating_user INT NULL, PRIMARY KEY (id_dating_user));";
+            String sqlCommand = "CREATE TABLE lovestruck.favourites_list_? (id_dating_user INT NOT NULL, PRIMARY " +
+                                        "KEY (id_dating_user));";
     
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
     
             preparedStatement.setInt(1, idDatingUser);
     
@@ -115,7 +120,7 @@ public class UserRepository
     
     public int retrieveDatingUserIdFromDb(DatingUser datingUser)
     {
-        establishConnection();
+        establishConnection("lovestruck");
         
         int idDatingUser = -1;
 
@@ -124,7 +129,7 @@ public class UserRepository
             String sqlCommand = "SELECT * FROM dating_users WHERE username like ?";
         
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
         
             preparedStatement.setString(1, "%" + datingUser.getUsername() + "%");
             System.out.println("TEST");
@@ -151,7 +156,7 @@ public class UserRepository
     
     public boolean isUsernameAvailable(String username)
     {
-        establishConnection();
+        establishConnection("lovestruck");
     
         boolean usernameIsAvailable = true; // sættes til at være available by default
     
@@ -160,7 +165,7 @@ public class UserRepository
             String sqlCommand = "SELECT * FROM dating_users WHERE username = ?";
         
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
         
             preparedStatement.setString(1, username);
        
@@ -182,7 +187,7 @@ public class UserRepository
     
     public boolean isEmailAvailable(String email)
     {
-        establishConnection();
+        establishConnection("lovestruck");
     
         boolean emailIsAvailable = true; // sættes til at være available by default
     
@@ -191,7 +196,7 @@ public class UserRepository
             String sqlCommand = "SELECT * FROM dating_users WHERE email = ?";
         
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
         
             preparedStatement.setString(1, email);
         
@@ -213,7 +218,7 @@ public class UserRepository
     
     public User checkIfUserExists(WebRequest dataFromLogInForm)
     {
-        establishConnection();
+        establishConnection("lovestruck");
     
         User loggedInUser = null;
         
@@ -222,7 +227,7 @@ public class UserRepository
             String sqlCommand = "SELECT * FROM admins WHERE username = ? AND password = ?";
         
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
-            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
         
             preparedStatement.setString(1, dataFromLogInForm.getParameter("username"));
         
