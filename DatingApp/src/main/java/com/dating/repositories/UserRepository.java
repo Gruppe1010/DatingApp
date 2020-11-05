@@ -31,7 +31,9 @@ public class UserRepository
     }
     
     /**
-     * Tilføjer DatingUser-objekt til dating_users-tabellen i db OG sætter dets id-attribut
+     * Tilføjer DatingUser-objekt til dating_users-tabellen i db
+     * OG sætter dets id-attribut
+     * OG opretter ny favourites_list-tabel i db knyttet til brugeren
      *
      * @param datingUser
      *
@@ -59,6 +61,7 @@ public class UserRepository
             preparedStatement.setString(6, datingUser.getEmail());
             preparedStatement.setString(7, datingUser.getPassword());
             
+            // user tilføjes til database
             preparedStatement.executeUpdate();
             
             // nu hvor user er blevet oprettet, tilføjer vi databasens genererede id_dating_user til datingUser-objektet
@@ -66,7 +69,11 @@ public class UserRepository
             
             if(idDatingUser!=-1)
             {
+                // setter id'et, hvis det er genereret korrekt
                 datingUser.setIdDatingUser(idDatingUser);
+                // genererer en favourites_list tabel i databasen - knyttet til user-entitet via id_dating_user
+                // fx til en user med id_dating_user 3 oprettes tabellen: favourites_list_3
+                createFavouritesListTableDb(idDatingUser);
             }
             
             return true;
@@ -76,6 +83,34 @@ public class UserRepository
             System.out.println("Error in addDatingUserToDb: " + e.getMessage());
             return false;
         }
+    }
+    
+    /**
+     * Opretter ny favourites_list tabel ud fra idDatingUser-int
+     *
+     * @param idDatingUser id'et som skal være i db-tabellens navn: fx favourites_list_3
+     *
+     * @return void
+     */
+    public void createFavouritesListTableDb(int idDatingUser)
+    {
+        try
+        {
+            establishConnection();
+    
+            String sqlCommand = "CREATE TABLE lovestruck.`favourites_list_?` (id_dating_user INT NULL, PRIMARY KEY (id_dating_user));";
+    
+            PreparedStatement preparedStatement = connection.prepareStatement(sqlCommand);
+    
+            preparedStatement.setInt(1, idDatingUser);
+    
+            preparedStatement.executeUpdate();
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error in createFavouritesListTableDb: " + e.getMessage());
+        }
+        
     }
     
     public int retrieveDatingUserIdFromDb(DatingUser datingUser)
