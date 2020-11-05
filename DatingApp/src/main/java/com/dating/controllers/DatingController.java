@@ -53,6 +53,12 @@ public class DatingController
     {
         return "searchpage"; // html
     }
+
+    @GetMapping("/editProfile")
+    public String editProfile()
+    {
+        return "editprofile"; // html
+    }
     
     
     // I PostMappingens "/" SKAL der stå "post" FØRST! : fx IKKE "/createUser" men "/postCreateUser"
