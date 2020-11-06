@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class DatingUser extends User
 {
+    // det er smart at have denne, fordi så skal vi ikke hente den fra databasen
+    // (fx når brugeren skal tilgå sin favoritliste)
     private int idDatingUser;
     private boolean blacklisted; // 0 == false, 1 == true
     private boolean sex; // false == mænd, true == kvinder

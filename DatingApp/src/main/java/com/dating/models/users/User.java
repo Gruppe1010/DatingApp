@@ -1,6 +1,6 @@
 package com.dating.models.users;
 
-public abstract class User
+public class User
 {
     private String username;
     private String email;

@@ -1,5 +1,6 @@
 package com.dating.repositories;
 
+import com.dating.models.users.Admin;
 import com.dating.models.users.DatingUser;
 import com.dating.models.users.User;
 import org.springframework.web.context.request.WebRequest;
@@ -10,6 +11,11 @@ public class UserRepository
 {
     Connection lovestruckConnection = null;
     Connection favouriteslistConnection = null;
+    User loggedInUser = new User();
+    
+    DatingUser loggedInDatingUser = new DatingUser();
+    Admin loggedInAdmin = new Admin();
+    
     
     /**
      * Laver en connection til lovestruck-databasen
@@ -223,8 +229,6 @@ public class UserRepository
     public User checkIfUserExists(WebRequest dataFromLogInForm)
     {
         lovestruckConnection = establishConnection("lovestruck");
-    
-        User loggedInUser = null;
         
         try
         {
@@ -234,13 +238,20 @@ public class UserRepository
             PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
         
             preparedStatement.setString(1, dataFromLogInForm.getParameter("username"));
+            preparedStatement.setString(2, dataFromLogInForm.getParameter("password"));
         
             ResultSet resultSet = preparedStatement.executeQuery();
-        
-            // TODO Find ud af hvorfor vi skal skrive next
-            if(resultSet.next())
+            
+            if(resultSet.next()) // hvis det er en admin
             {
-                //emailIsAvailable = false;
+                loggedInUser = (Admin) loggedInUser;
+    
+                System.out.println(loggedInUser.isAdmin());
+                
+                loggedInAdmin.setUsername(resultSet.getString(2));
+                loggedInAdmin.setEmail(resultSet.getString(3));
+                loggedInAdmin.setPassword(resultSet.getString(4));
+          
             }
         }
         catch(SQLException e)

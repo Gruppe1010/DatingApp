@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Admin extends User
 {
+    // TODO: overvej om denne skal slettes
     private ArrayList<DatingUser> blacklistedUsersList;
     
     
