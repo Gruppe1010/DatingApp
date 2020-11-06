@@ -38,6 +38,7 @@ public class UserService
     {
         return sexInput.equals("female");
     }
+    
     public static int resolveInterestedInInput(String interestedInInput)
     {
         int interestedIn = -1;

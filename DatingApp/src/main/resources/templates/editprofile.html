@@ -74,8 +74,8 @@
                                 <span>Jeg er interesseret i: </span>
                                 <br><br>
                                 <div class="sex fontsize">
-                                    <input type="radio" id="males" name="interestedininput" value="males"
-                                           class="color" required>
+                                    <input type="radio" id="males" name="interestedininput" value="males" th:checked="${loggedInUser.checkIfInterestedInMales()}"
+                                           class="color">
                                     <label for="males">Mænd&nbsp;</label>
 
                                     <input type="radio" id="females" name="interestedininput" value="females"

@@ -172,7 +172,35 @@ public class DatingUser extends User
     {
         return true;
     }
-
+    
+    // TODO: måske overflødig
+    public String convertInterestedInToString()
+    {
+        if(interestedIn==0)
+        {
+            return "males";
+        }
+        else if(interestedIn==1)
+        {
+            return "females";
+        }
+        
+        return "malesandfemales";
+    }
+    
+    public boolean checkIfInterestedInMales()
+    {
+        return interestedIn == 0;
+    }
+    
+    public boolean checkIfInterestedInFemales()
+    {
+        return interestedIn == 1;
+    }
+    public boolean checkIfInterestedInMalesAndFemales()
+    {
+        return interestedIn == 2;
+    }
     
     
     public void editUserInfo()
