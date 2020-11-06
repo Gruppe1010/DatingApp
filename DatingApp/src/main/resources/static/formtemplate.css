@@ -30,7 +30,7 @@
 .formlinestyling
 {
     position: relative;
-    width: 100%;
+    width: 50%;
 
     border-color: #333;
     border-radius: 5px; /*For afrundede kanter på border*/
@@ -156,6 +156,7 @@ input::-webkit-inner-spin-button
     /*float fik den til at ødelægge dynamikken i boksen. Left gjorde ikke.*/
     left: 269px;
 }
+
 .login
 {
     position: relative;

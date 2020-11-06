@@ -5,6 +5,7 @@ import com.dating.models.users.User;
 import com.dating.repositories.UserRepository;
 import com.dating.services.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
@@ -14,6 +15,7 @@ import java.util.Date;
 @Controller
 public class DatingController
 {
+    User loggedInUser = null;
     UserService userService = new UserService();
     UserRepository userRepository = new UserRepository();
     
@@ -61,9 +63,19 @@ public class DatingController
     }
 
     @GetMapping("/editProfile")
-    public String editProfile()
+    public String editProfile(Model datingUserModel)
     {
+        datingUserModel.addAttribute("loggedInUser", loggedInUser);
+        
+        
         return "editprofile"; // html
+    }
+    
+    @GetMapping("/editProfileConfirmation")
+    public String editProfileConfirmation()
+    {
+        
+        return "editprofileconfirmation"; // html
     }
     
     
@@ -86,24 +98,44 @@ public class DatingController
     @PostMapping("/postLogIn")
     public String postLogIn(WebRequest dataFromLogInForm)
     {
-        User loggedInUser = null;
+        User user = null;
+    
+        user = userRepository.checkIfUserExists(dataFromLogInForm);
+        loggedInUser = user;
         
-        loggedInUser = userRepository.checkIfUserExists(dataFromLogInForm);
-        
-        if(loggedInUser!=null) // hvis der ER blevet gemt en bruger i loggedInUser
+        if(user!=null) // hvis der ER blevet gemt en bruger i loggedInUser
         {
-            userRepository.setLoggedInUserToNull();
-            if(loggedInUser.isAdmin()) // hvis det er en admin:
+            userRepository.setLoggedInUserToNull(); // loggedInUser-attributten i UserRepository
+            if(user.isAdmin()) // hvis det er en admin:
             {
                 return "redirect:/startPageAdmin"; // url
             }
             // ellers er det en datingUser
-            System.out.println(loggedInUser.isDatingUser());
+            System.out.println(user.isDatingUser());
             return "redirect:/startPage"; // url
         }
         // hvis loggedInUser altså er null
         return "redirect:/logIn"; // url
     }
+    
+    @PostMapping("/postEditProfile")
+    public String postEditProfile(WebRequest dataFromEditProfileForm)
+    {
+        boolean isProfileEditted = userRepository.checkIfProfileWasEditted(dataFromEditProfileForm);
+        
+        // hvis checkIfChangesWereMade == true
+        
+        // updateUser()
+        
+        if(true)
+        {
+            return "redirect:/editProfileConfirmation"; // url
+        }
+    
+    
+        return "redirect:/editProfile"; // url
+    }
+    
     
     
     

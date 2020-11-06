@@ -14,6 +14,7 @@ public class DatingUser extends User
     private boolean sex; // false == mænd, true == kvinder
     private int interestedIn; // 0 == mænd, 1 == kvinder, 2 == begge køn
     private int age;
+    private String imagePath;
     // TODO private Image profilePicture;
     private String description;
     private ArrayList<String> tags;
@@ -29,7 +30,8 @@ public class DatingUser extends User
         this.sex = sex;
         this.interestedIn = interestedIn;
         this.age = age;
-    
+        
+        imagePath = "https://i.imgur.com/66Dq0AJ.png";
         // TODO profilePicture = null;
         description = null;
         tags = null;
@@ -136,7 +138,15 @@ public class DatingUser extends User
         this.kandidatListe = kandidatListe;
     }
     
+    public String getImagePath()
+    {
+        return imagePath;
+    }
     
+    public void setImagePath(String imagePath)
+    {
+        this.imagePath = imagePath;
+    }
     // andre metoder
     /**
      * Konverterer boolean til integer-værdi

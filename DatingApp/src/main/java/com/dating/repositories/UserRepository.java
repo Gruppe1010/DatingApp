@@ -342,6 +342,11 @@ public class UserRepository
         loggedInUser = null;
     }
     
+    public boolean checkIfProfileWasEditted(WebRequest dataFromEditProfileForm)
+    {
+        return true;
+    }
+    
     
     
 }

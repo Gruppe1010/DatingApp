@@ -8,7 +8,6 @@
     <meta name="description" content="Love struck - tænd gnisten"/>
 
     <!-- css-filer -->
-
     <link href="/editprofile.css" type="text/css" rel="stylesheet">
     <link href="/pagetemplate.css" type="text/css" rel="stylesheet">
     <link href="/formtemplate.css" type="text/css" rel="stylesheet">
@@ -29,8 +28,8 @@
     <!--content der inkapsler hele siden undtagen footer-->
     <div class="content">
         <div class="logo">
-            <a class="linklogo" href="/startPage"><img src="https://i.imgur.com/h8kGO5J.png" alt="" class="logo"></a>
-            <a class="linklogo" href="/startPage"><img src="https://i.imgur.com/LToUXOO.png" alt="" class="logo"></a>
+            <a href="/startPage"><img src="https://i.imgur.com/h8kGO5J.png" alt="" class="logo"></a>
+            <a href="/startPage"><img src="https://i.imgur.com/LToUXOO.png" alt="" class="logo"></a>
         </div>
 
         <div class="menubar">
@@ -49,7 +48,7 @@
                 <div id="form-container">
                     <!-- Dette er en form
                     Vi laver @PostMapping("/createUser") i Controlleren for at lave et endpoint - pga. denne form -->
-                    <form id="form" action="/postCreateUser" method="post">
+                    <form id="form" action="/postEditProfile" method="post">
                         <h3 class="formheadline">Rediger din bruger</h3>
 
                         <!--<input> Laver input-felt
@@ -67,12 +66,13 @@
                         oninput="setCustomValidity('')" == gør så der ikke er nogen fejlmeddelelse ved korrekt input
                         (skal kun bruges hvis oninvalid er brugt)
                         -->
-                        <div class="relativeinline"> <!--TIL: profilePicture -->
+                        <div class="relativeinline fontsize"> <!--TIL: profilePicture -->
 
                             <div> <!--Til: username, email, interestedIn, age, city -->
-
                                 <!--interestedIn -->
-                                <span class="fontsize">Jeg er interesseret i: </span>
+                                <br>
+                                <span>Jeg er interesseret i: </span>
+                                <br><br>
                                 <div class="sex fontsize">
                                     <input type="radio" id="males" name="interestedininput" value="males"
                                            class="color" required>
@@ -88,7 +88,7 @@
                                 </div><br>
 
                                 <!--username -->
-                                <input type="text" id="username" name="usernameinput"
+                                <input type="text" id="username" name="usernameinput" th:value="${loggedInUser.getUsername()}"
                                        placeholder="Brugernavn"
                                        oninvalid="this.setCustomValidity('Indtast venligst brugernavn')"
                                        oninput="setCustomValidity('')"
@@ -122,18 +122,35 @@
                                        oninput="setCustomValidity('')"
                                        class="color fontsize formlinestyling password" required><br><br>
 
+
+                                <!--description -->
+                                <input type="text" id="description" name="descriptioninput"
+                                       placeholder="Skriv noget om dig selv"
+                                       class="color fontsize descriptionbox"><br><br>
+                                <!--<textarea name="message" rows="10" cols="30">The cat was playing in the garden.</textarea>><br><br>-->
+
+
+                                <!--tags -->
+                                <input type="text" id="tags" name="tagsinput"
+                                       placeholder="Tags til din profil"
+                                       class="color fontsize tagsbox"><br><br>
+
+                                <input type="submit" value="Gem bruger" class="editprofilesubmit fontsize">
                             </div> <!--TIL: interestedIn, username, email, age, city -->
 
                             <div class="profilepicture"> <!--TIL: profilePicture -->
 
-                            <span>Hej</span>
+                                <!-- <span th:src="@{loggedInUser.getImagePath()}"></span>
+                                <form action="/action_page.php">
+                                    <label for="profilepicture">Tilføj profilbillede</label>
+                                    <input type="file" id="profilepicture" name="imageinput" accept="image/*"><br><br>
+
+                                </form> -->
 
                             </div>
                         </div>
 
 
-
-                        <input type="submit" value="Gem bruger" class="submit fontsize">
 
                     </form>
                 </div>
