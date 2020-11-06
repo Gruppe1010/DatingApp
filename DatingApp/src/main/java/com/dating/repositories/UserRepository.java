@@ -128,6 +128,14 @@ public class UserRepository
         
     }
     
+    /**
+     * Finder id_dating_user-værdien gemt i database på et givent user-objekt
+     *
+     * @param datingUser user-objektet som vi finder id_dating_user-værdien på/til
+     
+     *
+     * @return int id_dating_user-værdien som er fundet - -1 hvis ikke fundet
+     */
     public int retrieveDatingUserIdFromDb(DatingUser datingUser)
     {
         lovestruckConnection = establishConnection("lovestruck");
@@ -164,6 +172,14 @@ public class UserRepository
         return idDatingUser;
     }
     
+    /**
+     * Tjekker om username allerede er gemt på anden user i db
+     *
+     * @param username Username som tjekkes for om den er optaget
+     
+     *
+     * @return Boolean Svaret på om username'et er ledig
+     */
     public boolean isUsernameAvailable(String username)
     {
         lovestruckConnection = establishConnection("lovestruck");
@@ -195,6 +211,14 @@ public class UserRepository
         return usernameIsAvailable;
     }
     
+    /**
+     * Tjekker om email allerede er gemt på anden user i db
+     *
+     * @param email Email som tjekkes for om den er optaget
+   
+     *
+     * @return Boolean Svaret på om email'en er ledig
+     */
     public boolean isEmailAvailable(String email)
     {
         lovestruckConnection = establishConnection("lovestruck");
@@ -226,6 +250,13 @@ public class UserRepository
         return emailIsAvailable;
     }
     
+    /**
+     * Tjekker om bruger som prøver på at logge ind findes i enten admins eller dating_users tabel i db
+     *
+     * @param dataFromLogInForm WebRequest som bruges til at hente data fra login-form
+     *
+     * @return User Returnerer enten NULL hvis user ikke findes i db - eller enten admin eller datingUser
+     */
     public User checkIfUserExists(WebRequest dataFromLogInForm)
     {
         lovestruckConnection = establishConnection("lovestruck");
@@ -263,7 +294,15 @@ public class UserRepository
         return loggedInUser;
     }
     
-    
+    /**
+     * Finder en user i valgfri tabel ud fra username og password
+     *
+     * @param dataFromLogInForm WebRequest som bruges til at hente data fra login-form
+     * @param table tabel user findes i
+     *
+     * @return ResultSet Fundet user-entitet er gemt i ResultSettet - ALDRIG null, MEN tom, hvis user ikke findes i
+     * tabel
+     */
     public ResultSet findUserInDb(WebRequest dataFromLogInForm, String table)
     {
         ResultSet resultSet = null;
@@ -293,7 +332,11 @@ public class UserRepository
         return resultSet;
     }
     
-    
+    /**
+     * Nulstiller loggedInUser-klassevariabel
+     *
+     * @return void
+     */
     public void setLoggedInUserToNull()
     {
         loggedInUser = null;
