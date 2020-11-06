@@ -43,7 +43,7 @@
                 <div id="form-container">
                     <!-- Dette er en form
                     Vi laver @PostMapping("/createUser") i Controlleren for at lave et endpoint - pga. denne form -->
-                    <form id="login-form" action="/postCreateUser" method="post">
+                    <form id="login-form" action="/postCreateUser" method="post"> // TODO: her var fejlen med postCreateUser dukkede op som url
                         <h3 class="loginformheadline">Opret din bruger</h3>
                         <h5 class="loginformunderheadline">- og bliv lovestruck</h5>
 
@@ -104,8 +104,8 @@
                                oninput="setCustomValidity('')"
                                class="color fontsize formlinestyling" required><br><br>
 
-                        <input type="text" id="email" name="emailinput"
-                               placeholder="Email"  pattern="@"
+                        <input type="email" id="email" name="emailinput"
+                               placeholder="Email"
                                oninvalid="this.setCustomValidity('Din email skal indeholde \'@\'')"
                                oninput="setCustomValidity('')"
                                class="color fontsize formlinestyling" required><br><br>

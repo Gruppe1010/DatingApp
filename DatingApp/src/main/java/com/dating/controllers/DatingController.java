@@ -71,6 +71,7 @@ public class DatingController
     @PostMapping("/postCreateUser")
     public String postCreateUser(WebRequest dataFromCreateUserForm)
     {
+        System.out.println("TEST !!!!!!!!!!!!!!!!");
         DatingUser datingUser = userService.createDatingUser(dataFromCreateUserForm);
     
         if(datingUser!=null)

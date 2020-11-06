@@ -48,7 +48,7 @@ public class UserRepository
     
         try
         {
-            establishConnection("lovestruck");
+            lovestruckConnection = establishConnection("lovestruck");
         
             String sqlCommand = "INSERT into dating_users(blacklisted, sex, interested_in, age, username, email, " +
                                         "password) " +
@@ -100,12 +100,12 @@ public class UserRepository
     {
         try
         {
-            establishConnection("lovestruck");
+            favouriteslistConnection = establishConnection("lovestruck_favourites_list");
     
             String sqlCommand = "CREATE TABLE lovestruck.favourites_list_? (id_dating_user INT NOT NULL, PRIMARY " +
                                         "KEY (id_dating_user));";
     
-            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
+            PreparedStatement preparedStatement = favouriteslistConnection.prepareStatement(sqlCommand);
     
             preparedStatement.setInt(1, idDatingUser);
     
@@ -120,7 +120,7 @@ public class UserRepository
     
     public int retrieveDatingUserIdFromDb(DatingUser datingUser)
     {
-        establishConnection("lovestruck");
+        lovestruckConnection = establishConnection("lovestruck");
         
         int idDatingUser = -1;
 
@@ -156,7 +156,7 @@ public class UserRepository
     
     public boolean isUsernameAvailable(String username)
     {
-        establishConnection("lovestruck");
+        lovestruckConnection = establishConnection("lovestruck");
     
         boolean usernameIsAvailable = true; // sættes til at være available by default
     
@@ -187,7 +187,7 @@ public class UserRepository
     
     public boolean isEmailAvailable(String email)
     {
-        establishConnection("lovestruck");
+        lovestruckConnection = establishConnection("lovestruck");
     
         boolean emailIsAvailable = true; // sættes til at være available by default
     
@@ -218,7 +218,7 @@ public class UserRepository
     
     public User checkIfUserExists(WebRequest dataFromLogInForm)
     {
-        establishConnection("lovestruck");
+        lovestruckConnection = establishConnection("lovestruck");
     
         User loggedInUser = null;
         
