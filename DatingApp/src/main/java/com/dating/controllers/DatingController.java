@@ -41,8 +41,10 @@ public class DatingController
     }
     
     @GetMapping("/startPage")
-    public String startPage()
+    public String startPage(Model userModel)
     {
+        addAttributeToUserModel(userModel);
+        
         return "startpage"; // html
     }
     
@@ -65,17 +67,9 @@ public class DatingController
     }
 
     @GetMapping("/editProfile")
-    public String editProfile(Model adminModel, Model datingUserModel)
+    public String editProfile(Model userModel)
     {
-        // fordi vi skal bruge den samme loggedInUser-reference i html'en
-        if(loggedInAdmin!=null)
-        {
-            adminModel.addAttribute("loggedInUser", loggedInAdmin);
-        }
-        else if(loggedInDatingUser!=null)
-        {
-            datingUserModel.addAttribute("loggedInUser", loggedInDatingUser);
-        }
+        addAttributeToUserModel(userModel);
         
         return "editprofile"; // html
     }
@@ -148,6 +142,23 @@ public class DatingController
         return "redirect:/editProfile"; // url
     }
     
+    
+    
+    public void addAttributeToUserModel(Model userModel)
+    {
+        loggedInDatingUser = userRepository.retrieveLoggedInDatingUser();
+        loggedInAdmin = userRepository.retrieveLoggedInAdmin();
+        
+        // fordi vi skal bruge den samme loggedInUser-reference i html'en
+        if(loggedInAdmin != null)
+        {
+            userModel.addAttribute("loggedInUser", loggedInAdmin);
+        }
+        else if(loggedInDatingUser != null)
+        {
+            userModel.addAttribute("loggedInUser", loggedInDatingUser);
+        }
+    }
     
     
     

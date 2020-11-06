@@ -38,7 +38,17 @@
             <span class="menubarheadline"><a class="linkmenubarheadline" href="/chatPage"><i class="fas fa-envelope-open-text"></i> Chat</a></span>
             <span class="menubarheadline"><a class="linkmenubarheadline" href="/candidatePage"><i class="fas fa-heart"></i> Kandidater</a></span>
             <span class="menubarheadline"><a class="linkmenubarheadline" href="/searchPage"><i class="fas fa-search"></i> Søg</a></span>
-            <span class="menubarheadline"><a class="linkmenubarheadlinelogout" href="/"> Min Profil <i class="fas fa-caret-down"></i></a></span>
+            <span class="menubarheadline"  th:text="${loggedInUser.getUsername()}"><a class="linkmenubarheadlinelogout" href="/"> HEj  <i class="fas fa-caret-down"></i></a></span>
+
+            <div class="dropdown">
+                <button class="dropbtn">Dropdown</button>
+                <div class="dropdown-content">
+                    <a href="#">Link 1</a>
+                    <a href="#">Link 2</a>
+                    <a href="#">Link 3</a>
+                </div>
+            </div>
+
         </div>
 
         <div class="content-container">
@@ -48,7 +58,8 @@
                     <div class="textbox-container">
                         <div class="startpage-textbox textboxcontent">
 
-                            <p>Hej hej asdklsamfdsafm aeflkjnmalfwq</p>
+                            <p>Velkommen til Love Struck <3 <br>Vi giver dig chancen for at møde nye mennesker.<br>
+                                ... og hvem ved? Måske bliver du LoveStruck</p>
 
                         </div>
                     </div>

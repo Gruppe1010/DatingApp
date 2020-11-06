@@ -87,6 +87,7 @@ public class UserRepository
                 // genererer en favourites_list tabel i databasen - knyttet til user-entitet via id_dating_user
                 // fx til en user med id_dating_user 3 oprettes tabellen: favourites_list_3
                 createFavouritesListTableDb(idDatingUser);
+                loggedInDatingUser = datingUser;
             }
             
             return true;
@@ -423,6 +424,18 @@ public class UserRepository
     {
         return true;
     }
+    
+    public DatingUser retrieveLoggedInDatingUser()
+    {
+        return loggedInDatingUser;
+    }
+    
+    public Admin retrieveLoggedInAdmin()
+    {
+        return loggedInAdmin;
+    }
+    
+    
     
     
     

@@ -33,7 +33,6 @@ public class UserService
         return datingUser;
     }
     
-    
     public static boolean resolveSexInput(String sexInput)
     {
         return sexInput.equals("female");
@@ -62,5 +61,6 @@ public class UserService
     {
         return password.equals(confirmPassword);
     }
+ 
     
 }
