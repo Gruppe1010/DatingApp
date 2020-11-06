@@ -247,9 +247,9 @@ public class UserRepository
                     loggedInUser = loggedInDatingUser;
                 }
             }
-            if(resultSet!=null) // hvis den IKKE er null indeholder den altså ENTEN en admin ELLER en datingUser
+            System.out.println("lorte intelliJ tager fejl");
+            if(resultSet.next())
             {
-                System.out.println("lorte intelliJ tager fejl");
                 loggedInUser.setUsername(resultSet.getString(2));
                 loggedInUser.setEmail(resultSet.getString(3));
                 loggedInUser.setPassword(resultSet.getString(4));
@@ -269,7 +269,7 @@ public class UserRepository
         ResultSet resultSet = null;
         try
         {
-            String sqlCommand = "SELECT * FROM" + table +" ? WHERE username = ? AND password = ?";
+            String sqlCommand = "SELECT * FROM " + table +" WHERE username = ? AND password = ? ";
     
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
             PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
@@ -278,11 +278,13 @@ public class UserRepository
             preparedStatement.setString(2, dataFromLogInForm.getParameter("passwordinput"));
             
             resultSet = preparedStatement.executeQuery();
-            
+            /*
             if(!resultSet.next()) // hvis der IKKE ligger noget i resultSettet sættes det til null
             {
                 resultSet = null;
             }
+
+             */
         }
         catch(SQLException e)
         {
