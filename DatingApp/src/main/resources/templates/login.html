@@ -8,7 +8,9 @@
     <meta name="description" content="Love struck - tænd gnisten"/>
 
     <!-- css-filer -->
-    <link href="/index.css" type="text/css" rel="stylesheet">
+    <link href="/indexandloginpage.css" type="text/css" rel="stylesheet">
+    <link href="/pagetemplate.css" type="text/css" rel="stylesheet">
+    <link href="/formtemplate.css" type="text/css" rel="stylesheet">
 
 
     <!-- bootstraaaaap -->
@@ -22,16 +24,15 @@
 
 </head>
 <body>
-<button type="button" class="loginbutton fontsize"><a href="/">Gå tilbage</a></button>
+<button type="button" class="topcornerbutton fontsize"><a href="/">Gå tilbage</a></button>
 <div class="indexwrapper">
 
     <div class="container font">
-
-        <div class="logos">
-            <div class="logo">
-                <a class="linklogo"><img src="https://i.imgur.com/h8kGO5J.png" alt="/textLogo.png" class="logo"></a>
+        <div class="indexlogos">
+            <div class="indexlogo">
+                <img src="https://i.imgur.com/h8kGO5J.png" alt="/textLogo.png" class="indexlogo">
                 <span>&nbsp; &nbsp; &nbsp;</span>
-                <a class="linklogo"><img src="https://i.imgur.com/LToUXOO.png" alt="/heartLogo.png" class="logo"></a>
+                <img src="https://i.imgur.com/LToUXOO.png" alt="/heartLogo.png" class="indexlogo">
             </div>
         </div>
 
@@ -41,9 +42,9 @@
                 <div id="form-container">
                     <!-- Dette er en form
                     Vi laver @PostMapping("/postLogIn") i Controlleren for at lave et endpoint - pga. denne form -->
-                    <form id="login-form" action="/postLogIn" method="post">
-                        <h3 class="loginformheadline">Log ind</h3>
-                        <h5 class="loginformunderheadline">- kærligheden venter! </h5>
+                    <form id="form" action="/postLogIn" method="post">
+                        <h3 class="formheadline">Log ind</h3>
+                        <h5 class="formsubheadline">- kærligheden venter! </h5>
 
                         <!--<input> Laver input-felt
                         type="text" == typen af input der tages imod i inputfeltet

@@ -1,0 +1,18 @@
+
+.relativeinline
+{
+    position: relative;
+    display: flex;
+    border: #333333;
+}
+
+.profilepicture
+{
+    float: right;
+    margin: 20px;
+}
+
+
+
+/*HERFRA*/
+

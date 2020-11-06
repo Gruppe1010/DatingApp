@@ -10,6 +10,18 @@ body
     background-attachment: fixed;
 }
 
+.fontsize
+{
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Bitter', serif;
+}
+
+.color
+{
+    background-color: #FAD4E2;
+}
+
 .logo
 {
     position: relative;
