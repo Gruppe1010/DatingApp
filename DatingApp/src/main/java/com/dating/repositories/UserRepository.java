@@ -102,7 +102,11 @@ public class UserRepository
         {
             favouriteslistConnection = establishConnection("lovestruck_favourites_list");
     
-            String sqlCommand = "CREATE TABLE lovestruck.favourites_list_? (id_dating_user INT NOT NULL, PRIMARY " +
+            // lovestruc_favourites_list == den database som vi laver tabellen i
+            // favourites_list_? == navnet på tabellen
+            // id_dating_user INT NOT NULL,== navn på ny kolonne og hvilke bokse der er krydset af
+            // PRIMARY KEY(id_dating_user) == siger at det er kolonnen id_dating_user som er primary key
+            String sqlCommand = "CREATE TABLE lovestruck_favourites_list.favourites_list_? (id_dating_user INT NOT NULL, PRIMARY " +
                                         "KEY (id_dating_user));";
     
             PreparedStatement preparedStatement = favouriteslistConnection.prepareStatement(sqlCommand);
