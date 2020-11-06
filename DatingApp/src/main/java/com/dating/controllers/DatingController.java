@@ -1,5 +1,6 @@
 package com.dating.controllers;
 
+import com.dating.models.users.Admin;
 import com.dating.models.users.DatingUser;
 import com.dating.models.users.User;
 import com.dating.repositories.UserRepository;
@@ -15,7 +16,8 @@ import java.util.Date;
 @Controller
 public class DatingController
 {
-    User loggedInUser = null;
+    Admin loggedInAdmin = null;
+    DatingUser loggedInDatingUser = null;
     UserService userService = new UserService();
     UserRepository userRepository = new UserRepository();
     
@@ -63,10 +65,17 @@ public class DatingController
     }
 
     @GetMapping("/editProfile")
-    public String editProfile(Model datingUserModel)
+    public String editProfile(Model adminModel, Model datingUserModel)
     {
-        datingUserModel.addAttribute("loggedInUser", loggedInUser);
-        
+        // fordi vi skal bruge den samme loggedInUser-reference i html'en
+        if(loggedInAdmin!=null)
+        {
+            adminModel.addAttribute("loggedInUser", loggedInAdmin);
+        }
+        else if(loggedInDatingUser!=null)
+        {
+            datingUserModel.addAttribute("loggedInUser", loggedInDatingUser);
+        }
         
         return "editprofile"; // html
     }
@@ -98,24 +107,26 @@ public class DatingController
     @PostMapping("/postLogIn")
     public String postLogIn(WebRequest dataFromLogInForm)
     {
-        User user = null;
+        // vi tjekker admin-tabellen først fordi den er kortest (selvom det nok oftere er en datingUser som vil logge
+        // ind)
+        loggedInAdmin = userRepository.checkIfUserExistsInAdminsTable(dataFromLogInForm);
     
-        user = userRepository.checkIfUserExists(dataFromLogInForm);
-        loggedInUser = user;
-        System.out.println("Username: " + loggedInUser.getUsername());
-
-        if(user!=null) // hvis der ER blevet gemt en bruger i loggedInUser
+        if(loggedInAdmin.getUsername()!=null) // hvis den har fundet en admin
         {
-            userRepository.setLoggedInUserToNull(); // loggedInUser-attributten i UserRepository
-            if(user.isAdmin()) // hvis det er en admin:
-            {
-                return "redirect:/startPageAdmin"; // url
-            }
-            // ellers er det en datingUser
-            System.out.println(user.isDatingUser());
+            return "redirect:/startPageAdmin"; // url
+        }
+        // ellers tjekker vi om det er en datingUser
+        loggedInDatingUser = userRepository.checkIfUserExistsInDatingUsersTable(dataFromLogInForm);
+    
+        if(loggedInDatingUser.getUsername()!=null)
+        {
+            loggedInAdmin = null;
             return "redirect:/startPage"; // url
         }
-        // hvis loggedInUser altså er null
+        // TODO: evt. skriv metode som sætter begge user-ting til null - fordi lige nu har de fået tildelt tomme brugere
+        // brugeren er ikke fundet
+        loggedInAdmin = null;
+        loggedInDatingUser = null;
         return "redirect:/logIn"; // url
     }
     

@@ -12,7 +12,7 @@ public class UserRepository
     Connection lovestruckConnection = null;
     Connection favouriteslistConnection = null;
     
-    User loggedInUser = null;
+    // User loggedInUser = null;
     DatingUser loggedInDatingUser = new DatingUser();
     Admin loggedInAdmin = new Admin();
     
@@ -250,6 +250,7 @@ public class UserRepository
         return emailIsAvailable;
     }
     
+    
     /**
      * Tjekker om bruger som prøver på at logge ind findes i enten admins eller dating_users tabel i db
      *
@@ -257,7 +258,7 @@ public class UserRepository
      *
      * @return User Returnerer enten NULL hvis user ikke findes i db - eller enten admin eller datingUser
      */
-    public User checkIfUserExists(WebRequest dataFromLogInForm)
+    /*public User checkIfUserExists(WebRequest dataFromLogInForm)
     {
         lovestruckConnection = establishConnection("lovestruck");
         
@@ -285,7 +286,6 @@ public class UserRepository
                     loggedInUser.setUsername(resultSet.getString(3));
                     loggedInUser.setEmail(resultSet.getString(4));
                     loggedInUser.setPassword(resultSet.getString(5));
-                    loggedInUser.set
                    
                 }
             }
@@ -297,6 +297,59 @@ public class UserRepository
     
         return loggedInUser;
     }
+    
+     */
+    
+    
+    public Admin checkIfUserExistsInAdminsTable(WebRequest dataFromLogInForm)
+    {
+        lovestruckConnection = establishConnection("lovestruck");
+        
+        try
+        {
+            ResultSet resultSet = findUserInDb(dataFromLogInForm, "admins");
+            
+            if(resultSet.next()) // hvis admin er fundet i db
+            {
+                loggedInAdmin.setUsername(resultSet.getString(3));
+                loggedInAdmin.setEmail(resultSet.getString(4));
+                loggedInAdmin.setPassword(resultSet.getString(5));
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error in isEmailAvailable: " + e.getMessage());
+        }
+        
+        return loggedInAdmin;
+    }
+    
+    public DatingUser checkIfUserExistsInDatingUsersTable(WebRequest dataFromLogInForm)
+    {
+        lovestruckConnection = establishConnection("lovestruck");
+        
+        try
+        {
+            ResultSet resultSet = findUserInDb(dataFromLogInForm, "dating_users");
+            
+            if(resultSet.next()) // hvis det er en datingUser
+            {
+    
+                loggedInDatingUser.setUsername(resultSet.getString(3));
+                loggedInDatingUser.setEmail(resultSet.getString(4));
+                loggedInDatingUser.setPassword(resultSet.getString(5));
+                
+            }
+            
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error in isEmailAvailable: " + e.getMessage());
+        }
+        
+        return loggedInDatingUser;
+    }
+    
     
     /**
      * Finder en user i valgfri tabel ud fra username og password
@@ -337,13 +390,14 @@ public class UserRepository
     }
     
     /**
-     * Nulstiller loggedInUser-klassevariabel
+     * Nulstiller loggedInAdmin og loggedInDatingUser-klassevariabel
      *
      * @return void
      */
     public void setLoggedInUserToNull()
     {
-        loggedInUser = null;
+        loggedInAdmin = null;
+        loggedInDatingUser = null;
     }
     
     public boolean checkIfProfileWasEditted(WebRequest dataFromEditProfileForm)
