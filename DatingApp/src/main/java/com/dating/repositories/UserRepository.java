@@ -136,9 +136,9 @@ public class UserRepository
             PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
         
             preparedStatement.setString(1, "%" + datingUser.getUsername() + "%");
-            System.out.println("TEST");
+
             ResultSet resultSet = preparedStatement.executeQuery();
-            System.out.println("Test2");
+
 
             // TODO Find ud af hvorfor vi skal skrive next
             if(resultSet.next())
@@ -148,7 +148,7 @@ public class UserRepository
 
 
 
-            System.out.println(idDatingUser);
+            //System.out.println(idDatingUser);
         }
         catch(SQLException e)
         {
