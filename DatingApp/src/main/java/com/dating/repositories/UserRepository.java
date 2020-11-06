@@ -249,6 +249,7 @@ public class UserRepository
             }
             if(resultSet!=null) // hvis den IKKE er null indeholder den altså ENTEN en admin ELLER en datingUser
             {
+                System.out.println("lorte intelliJ tager fejl");
                 loggedInUser.setUsername(resultSet.getString(2));
                 loggedInUser.setEmail(resultSet.getString(3));
                 loggedInUser.setPassword(resultSet.getString(4));
@@ -277,10 +278,10 @@ public class UserRepository
             preparedStatement.setString(2, dataFromLogInForm.getParameter("passwordinput"));
             
             resultSet = preparedStatement.executeQuery();
-            if(!resultSet.next())
+            
+            if(!resultSet.next()) // hvis der IKKE ligger noget i resultSettet sættes det til null
             {
                 resultSet = null;
-                System.out.println("resultset: " + resultSet);
             }
         }
         catch(SQLException e)
