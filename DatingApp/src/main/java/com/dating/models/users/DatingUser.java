@@ -188,18 +188,33 @@ public class DatingUser extends User
         return "malesandfemales";
     }
     
-    public boolean checkIfInterestedInMales()
+    public String checkIfInterestedInMales()
     {
-        return interestedIn == 0;
+
+        if(interestedIn == 0)
+        {
+            return ""+ interestedIn;
+        }
+        return null;
+
     }
     
-    public boolean checkIfInterestedInFemales()
+    public String checkIfInterestedInFemales()
     {
-        return interestedIn == 1;
+        if(interestedIn == 1)
+        {
+            return "" + interestedIn;
+        }
+        return null;
     }
-    public boolean checkIfInterestedInMalesAndFemales()
+
+    public String checkIfInterestedInMalesAndFemales()
     {
-        return interestedIn == 2;
+        if(interestedIn == 2)
+        {
+            return ""+ interestedIn;
+        }
+        return null;
     }
     
     
