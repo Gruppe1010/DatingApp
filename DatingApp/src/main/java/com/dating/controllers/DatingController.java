@@ -92,11 +92,13 @@ public class DatingController
         
         if(loggedInUser!=null) // hvis der ER blevet gemt en bruger i loggedInUser
         {
+            userRepository.setLoggedInUserToNull();
             if(loggedInUser.isAdmin()) // hvis det er en admin:
             {
                 return "redirect:/startPageAdmin"; // url
             }
             // ellers er det en datingUser
+            System.out.println(loggedInUser.isDatingUser());
             return "redirect:/startPage"; // url
         }
         // hvis loggedInUser altså er null

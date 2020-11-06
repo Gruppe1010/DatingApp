@@ -294,5 +294,11 @@ public class UserRepository
     }
     
     
+    public void setLoggedInUserToNull()
+    {
+        loggedInUser = null;
+    }
+    
+    
     
 }
