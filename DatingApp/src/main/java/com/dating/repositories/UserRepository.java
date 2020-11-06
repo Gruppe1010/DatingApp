@@ -11,8 +11,8 @@ public class UserRepository
 {
     Connection lovestruckConnection = null;
     Connection favouriteslistConnection = null;
-    User loggedInUser = new User();
     
+    User loggedInUser = new User();
     DatingUser loggedInDatingUser = new DatingUser();
     Admin loggedInAdmin = new Admin();
     
@@ -232,26 +232,26 @@ public class UserRepository
         
         try
         {
-            String sqlCommand = "SELECT * FROM admins WHERE username = ? AND password = ?";
-        
-            // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
-            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
-        
-            preparedStatement.setString(1, dataFromLogInForm.getParameter("username"));
-            preparedStatement.setString(2, dataFromLogInForm.getParameter("password"));
-        
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = findUserInDb(dataFromLogInForm, "admins");
             
             if(resultSet.next()) // hvis det er en admin
             {
-                loggedInUser = (Admin) loggedInUser;
+                loggedInUser = loggedInAdmin;
+            }
+            else // når det ikke er en admin, så tjekker vi om det er en datingUser
+            {
+                resultSet = findUserInDb(dataFromLogInForm, "dating_users");
     
-                System.out.println(loggedInUser.isAdmin());
-                
-                loggedInAdmin.setUsername(resultSet.getString(2));
-                loggedInAdmin.setEmail(resultSet.getString(3));
-                loggedInAdmin.setPassword(resultSet.getString(4));
-          
+                if(resultSet.next()) // hvis det er en datingUser
+                {
+                    loggedInUser = loggedInDatingUser;
+                }
+            }
+            if(resultSet!=null) // hvis den IKKE er null indeholder den altså ENTEN en admin ELLER en datingUser
+            {
+                loggedInUser.setUsername(resultSet.getString(2));
+                loggedInUser.setEmail(resultSet.getString(3));
+                loggedInUser.setPassword(resultSet.getString(4));
             }
         }
         catch(SQLException e)
@@ -260,6 +260,31 @@ public class UserRepository
         }
     
         return loggedInUser;
+    }
+    
+    
+    public ResultSet findUserInDb(WebRequest dataFromLogInForm, String table)
+    {
+        ResultSet resultSet = null;
+        try
+        {
+            String sqlCommand = "SELECT * FROM ? WHERE username = ? AND password = ?";
+    
+            // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
+            PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
+    
+            preparedStatement.setString(1, table);
+            preparedStatement.setString(2, dataFromLogInForm.getParameter("usernameinput"));
+            preparedStatement.setString(3, dataFromLogInForm.getParameter("passwordinput"));
+            
+            resultSet = preparedStatement.executeQuery();
+            System.out.println(resultSet);
+        }
+        catch(SQLException e)
+        {
+            System.out.println("Error in findUserInDb: " + e.getMessage());
+        }
+        return resultSet;
     }
     
     
