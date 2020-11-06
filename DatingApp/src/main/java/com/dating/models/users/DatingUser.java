@@ -26,13 +26,13 @@ public class DatingUser extends User
     public DatingUser(boolean sex, int interestedIn, int age, String username, String email, String password)
     {
         super(username, email, password); // den kalder superklassens constructor
-        this.blacklisted = false;
+        this.blacklisted = false; // en bruger er aldrig blacklisted til at starte med når de opretter sig
         this.sex = sex;
         this.interestedIn = interestedIn;
         this.age = age;
         
+        // sættes til standard-billede
         imagePath = "https://i.imgur.com/66Dq0AJ.png";
-        // TODO profilePicture = null;
         description = null;
         tags = null;
         postalInfo = null;
@@ -166,6 +166,10 @@ public class DatingUser extends User
         
         return convertedBoolean;
     }
+    public boolean convertIntToBoolean(int intInput)
+    {
+        return intInput == 1;
+    }
     
     @Override
     public boolean isDatingUser()
@@ -190,13 +194,11 @@ public class DatingUser extends User
     
     public String checkIfInterestedInMales()
     {
-
         if(interestedIn == 0)
         {
             return ""+ interestedIn;
         }
         return null;
-
     }
     
     public String checkIfInterestedInFemales()

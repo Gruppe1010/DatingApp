@@ -1,11 +1,13 @@
 package com.dating.repositories;
 
+import com.dating.models.PostalInfo;
 import com.dating.models.users.Admin;
 import com.dating.models.users.DatingUser;
 import com.dating.models.users.User;
 import org.springframework.web.context.request.WebRequest;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserRepository
 {
@@ -56,6 +58,7 @@ public class UserRepository
         {
             lovestruckConnection = establishConnection("lovestruck");
         
+            // TODO: tilføj: image_path som kolonne i database - og så tilføj den sqlCommanden her
             String sqlCommand = "INSERT into dating_users(blacklisted, sex, interested_in, age, username, email, " +
                                         "password) " +
                                         "values (?,?,?,?,?,?,?);";
@@ -335,9 +338,25 @@ public class UserRepository
             if(resultSet.next()) // hvis det er en datingUser
             {
     
+                /*
+                private boolean sex; // false == mænd, true == kvinder
+             
+                private int age;
+                private String imagePath;
+                // TODO private Image profilePicture;
+                private String description;
+                private ArrayList<String> tags;
+                private PostalInfo postalInfo;
+                
+                 */
+                
+                loggedInDatingUser.setIdDatingUser(resultSet.getInt(1));
+                loggedInDatingUser.setBlacklisted(loggedInDatingUser.convertIntToBoolean(resultSet.getInt(2)));
                 loggedInDatingUser.setUsername(resultSet.getString(3));
                 loggedInDatingUser.setEmail(resultSet.getString(4));
                 loggedInDatingUser.setPassword(resultSet.getString(5));
+    
+                loggedInDatingUser.setInterestedIn(resultSet.getInt(8));
                 
             }
             
