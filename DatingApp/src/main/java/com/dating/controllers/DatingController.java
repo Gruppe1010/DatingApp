@@ -102,7 +102,8 @@ public class DatingController
     
         user = userRepository.checkIfUserExists(dataFromLogInForm);
         loggedInUser = user;
-        
+        System.out.println("Username: " + loggedInUser.getUsername());
+
         if(user!=null) // hvis der ER blevet gemt en bruger i loggedInUser
         {
             userRepository.setLoggedInUserToNull(); // loggedInUser-attributten i UserRepository

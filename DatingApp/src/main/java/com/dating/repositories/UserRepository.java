@@ -268,23 +268,36 @@ public class UserRepository
             if(resultSet.next()) // hvis det er en admin
             {
                 loggedInUser = loggedInAdmin;
+
+                loggedInUser.setUsername(resultSet.getString(3));
+                loggedInUser.setEmail(resultSet.getString(4));
+                loggedInUser.setPassword(resultSet.getString(5));
+                System.out.println("Resultset1: " + resultSet.getString(3));
             }
             else // når det ikke er en admin, så tjekker vi om det er en datingUser
             {
                 resultSet = findUserInDb(dataFromLogInForm, "dating_users");
-    
+
                 if(resultSet.next()) // hvis det er en datingUser
                 {
                     loggedInUser = loggedInDatingUser;
+
+                    loggedInUser.setUsername(resultSet.getString(3));
+                    loggedInUser.setEmail(resultSet.getString(4));
+                    loggedInUser.setPassword(resultSet.getString(5));
+                    System.out.println("Resultset2: " + resultSet.getString(3));
                 }
             }
-            System.out.println("lorte intelliJ tager fejl");
-            if(resultSet.next())
+
+          /*  if(resultSet.next())
             {
                 loggedInUser.setUsername(resultSet.getString(2));
                 loggedInUser.setEmail(resultSet.getString(3));
                 loggedInUser.setPassword(resultSet.getString(4));
+                System.out.println("Resultset: " + resultSet.getString(2));
             }
+
+           */
         }
         catch(SQLException e)
         {
