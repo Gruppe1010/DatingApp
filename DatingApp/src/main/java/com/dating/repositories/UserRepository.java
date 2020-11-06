@@ -268,17 +268,20 @@ public class UserRepository
         ResultSet resultSet = null;
         try
         {
-            String sqlCommand = "SELECT * FROM ? WHERE username = ? AND password = ?";
+            String sqlCommand = "SELECT * FROM" + table +" ? WHERE username = ? AND password = ?";
     
             // det er vores SQL sætning som vi beder om at få prepared til at blive sendt til databasen:
             PreparedStatement preparedStatement = lovestruckConnection.prepareStatement(sqlCommand);
-    
-            preparedStatement.setString(1, table);
-            preparedStatement.setString(2, dataFromLogInForm.getParameter("usernameinput"));
-            preparedStatement.setString(3, dataFromLogInForm.getParameter("passwordinput"));
+            
+            preparedStatement.setString(1, dataFromLogInForm.getParameter("usernameinput"));
+            preparedStatement.setString(2, dataFromLogInForm.getParameter("passwordinput"));
             
             resultSet = preparedStatement.executeQuery();
-            System.out.println(resultSet);
+            if(!resultSet.next())
+            {
+                resultSet = null;
+                System.out.println("resultset: " + resultSet);
+            }
         }
         catch(SQLException e)
         {
