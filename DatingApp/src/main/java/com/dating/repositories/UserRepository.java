@@ -12,7 +12,7 @@ public class UserRepository
     Connection lovestruckConnection = null;
     Connection favouriteslistConnection = null;
     
-    User loggedInUser = new User();
+    User loggedInUser = null;
     DatingUser loggedInDatingUser = new DatingUser();
     Admin loggedInAdmin = new Admin();
     

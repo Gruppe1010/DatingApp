@@ -90,17 +90,16 @@ public class DatingController
         
         loggedInUser = userRepository.checkIfUserExists(dataFromLogInForm);
         
-        // tjek bruger ting bla blah
-        if(loggedInUser!=null)
+        if(loggedInUser!=null) // hvis der ER blevet gemt en bruger i loggedInUser
         {
-            if(loggedInUser.isAdmin())
+            if(loggedInUser.isAdmin()) // hvis det er en admin:
             {
                 return "redirect:/startPageAdmin"; // url
             }
             // ellers er det en datingUser
             return "redirect:/startPage"; // url
         }
-        
+        // hvis loggedInUser altså er null
         return "redirect:/logIn"; // url
     }
     
